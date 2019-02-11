@@ -1,11 +1,15 @@
 package dao;
 
+import java.util.List;
+
+import model.Computer;
+
 public interface ComputerDao {
 	
-	public void ListComputers();
-	public void DeleteComputers();
-	public void UpdateComputers();	
-	public void AddComputers();
+	public List<Computer> ListComputers();
+	public void DeleteComputers(Computer computer);
+	public void UpdateComputers(Computer computer);	
+	public void AddComputers(Computer computer);
 	
 
 }

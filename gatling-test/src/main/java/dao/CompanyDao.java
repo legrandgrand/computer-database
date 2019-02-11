@@ -1,5 +1,9 @@
 package dao;
 
+import java.util.List;
+
+import model.Company;
+
 public interface CompanyDao{
-	public void ListCompany();
+	public List<Company> ListCompany();
 }

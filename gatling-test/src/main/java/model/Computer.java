@@ -48,9 +48,10 @@ public class Computer {
 		this.namePC = namePC;
 	}
 	
-	public void DetailComputer() {
-		// TODO Auto-generated method stub
-		
+	@Override
+	public String toString() {
+		String computer="Name: "+ namePC + "/n Introduction : " +  dateB + "/n Discontinuation: " + dateF + "/n Company Name: "+ nameManuf;
+		return computer;
 	}
 
 }
