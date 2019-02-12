@@ -4,16 +4,19 @@ import java.sql.Timestamp;
 
 public class Computer {
 	private String namePC;//Obligatoire
-	private String nameManuf;
+	private int nameManuf;
 	private Timestamp dateB;
 	private Timestamp dateF;//Supérieur à dateB
 	
-	public Computer(String namePC, String nameManuf, Timestamp dateB, Timestamp dateF) {
+	public Computer(String namePC, int nameManuf, Timestamp dateIntro, Timestamp dateExit) {
 		super();
 		this.setNamePC(namePC);
 		this.setNameManuf(nameManuf);
-		this.setDateB(dateB);
-		this.setDateF(dateF);
+		this.setDateB(dateIntro);
+		this.setDateF(dateExit);
+	}
+
+	public Computer() {
 	}
 
 	public Timestamp getDateB() {
@@ -32,11 +35,11 @@ public class Computer {
 		this.dateF = dateF;
 	}
 
-	public String getNameManuf() {
+	public int getNameManuf() {
 		return nameManuf;
 	}
 
-	public void setNameManuf(String nameManuf) {
+	public void setNameManuf(int nameManuf) {
 		this.nameManuf = nameManuf;
 	}
 
@@ -50,7 +53,7 @@ public class Computer {
 	
 	@Override
 	public String toString() {
-		String computer="Name: "+ namePC + "/n Introduction : " +  dateB + "/n Discontinuation: " + dateF + "/n Company Name: "+ nameManuf;
+		String computer="Name: "+ namePC + "\n Introduction : " +  dateB + "\n Discontinuation: " + dateF + "\n Company Number: "+ nameManuf;
 		return computer;
 	}
 

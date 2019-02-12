@@ -11,11 +11,11 @@ public class DaoFactory {
 	String password = "qwerty1234";
 
 	
-	public Connection ConnectDB(Connection connection) throws SQLException {
+	public Connection connectDB(Connection connection) throws SQLException {
 		   return connection = DriverManager.getConnection( url, user, password );
 	}
 	
-	public void CloseDB(Connection connection) throws SQLException {
+	public void closeDB(Connection connection) throws SQLException {
 		connection.close();
 		
 	}

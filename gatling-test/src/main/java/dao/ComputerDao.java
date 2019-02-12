@@ -6,10 +6,9 @@ import model.Computer;
 
 public interface ComputerDao {
 	
-	public List<Computer> ListComputers();
-	public void DeleteComputers(Computer computer);
-	public void UpdateComputers(Computer computer);	
-	public void AddComputers(Computer computer);
-	
+	public List<Computer> listComputers();
+	public void deleteComputer(String computerName);
+	public void updateComputer(Computer computer);	
+	public void addComputer(Computer computer);	
 
 }

@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -13,29 +14,28 @@ import model.Computer;
 public class ComputerDaoImp implements ComputerDao{
 
 
-
 	@Override
-	public List<Computer> ListComputers() {
+	public List<Computer> listComputers() {
 		List<Computer> list= new ArrayList<Computer>();
 		DaoFactory factory = new DaoFactory();
 		Connection connection=null;
 		
 		try {
-			connection = factory.ConnectDB(connection);
+			connection = factory.connectDB(connection);
 			/* Création de l'objet gérant les requêtes */
 			Statement statement = connection.createStatement();
-			ResultSet resultat = statement.executeQuery("SELECT id, name, introduced, discontinued, company_id FROM computer");
+			ResultSet resultat = statement.executeQuery("SELECT name, introduced, discontinued, company_id FROM computer");
 	
 			 while(resultat.next()) {
-				 int id=resultat.getInt("id");
 				 String name=resultat.getString("name");
-				 String company_id=resultat.getString("company_id");
+				 int company_id=resultat.getInt("company_id");
 				 Timestamp introduced=resultat.getTimestamp("introduced");
 				 Timestamp discontinued=resultat.getTimestamp("discontinued");
 				 Computer computer=new Computer(name, company_id, introduced, discontinued);
 				 list.add(computer);
 			}
 			} catch ( SQLException e ) {
+				System.out.println("RIP");
 		    } finally {
 		        if ( connection != null ) {
 		                try {
@@ -45,28 +45,31 @@ public class ComputerDaoImp implements ComputerDao{
 						}
 		    }
 	    }
-
 		return list;
 		
 	}
 
+	
+	
 	@Override
-	public void DeleteComputers(Computer computer) {
-		List<Computer> list= new ArrayList<Computer>();
+	public void deleteComputer(String computerName) {
 		DaoFactory factory = new DaoFactory();
 		Connection connection=null;
 		
-		String name=computer.getNamePC();
-		String company_id=computer.getNameManuf();
+		/*String company_id=computer.getNameManuf();
 		Timestamp introduced=computer.getDateB();
-		Timestamp discontinued=computer.getDateF();
+		Timestamp discontinued=computer.getDateF();*/
 		
 		try {
-			connection = factory.ConnectDB(connection);
+			connection = factory.connectDB(connection);
 			/* Création de l'objet gérant les requêtes */
-			Statement statement = connection.createStatement();
-			ResultSet resultat = statement.executeQuery("DELETE FROM computer WHERE id=");
+			String sql=("DELETE FROM computer WHERE name= ?");
+			PreparedStatement statement = connection.prepareStatement(sql);
+			statement.setString(1, computerName);
+			statement.executeUpdate();
+			
 			} catch ( SQLException e ) {
+				System.out.println("RIP");
 		    } finally {
 		        if ( connection != null ) {
 		                try {
@@ -79,23 +82,30 @@ public class ComputerDaoImp implements ComputerDao{
 		
 	}
 
+	
+	
 	@Override
-	public void UpdateComputers(Computer computer) {
-		List<Computer> list= new ArrayList<Computer>();
+	public void updateComputer(Computer computer) {
 		DaoFactory factory = new DaoFactory();
 		Connection connection=null;
 		
 		String name=computer.getNamePC();
-		String company_id=computer.getNameManuf();
+		int company_id=computer.getNameManuf();
 		Timestamp introduced=computer.getDateB();
 		Timestamp discontinued=computer.getDateF();
 		
 		try {
-			connection = factory.ConnectDB(connection);
+			connection = factory.connectDB(connection);
 			/* Création de l'objet gérant les requêtes */
-			Statement statement = connection.createStatement();
-			int resultat = statement.executeUpdate("UPDATE computer SET +id, name, introduced, discontinued, company_id WHERE");
+			String sql=("UPDATE computer SET introduced = ?, discontinued = ?, company_id = ? WHERE name= ?");
+			PreparedStatement statement = connection.prepareStatement(sql);
+			statement.setTimestamp(1, introduced);
+			statement.setTimestamp(2, discontinued);
+			statement.setInt(3, company_id);
+			statement.setString(4, name);
+			statement.executeUpdate();
 			} catch ( SQLException e ) {
+				System.out.println("RIP");
 		    } finally {
 		        if ( connection != null ) {
 		                try {
@@ -105,25 +115,34 @@ public class ComputerDaoImp implements ComputerDao{
 						}
 		    }
 	    }
-		
 	}
 
+	
+	
+	//TODO: gérer les nulls
 	@Override
-	public void AddComputers(Computer computer) {
+	public void addComputer(Computer computer) {
 		DaoFactory factory = new DaoFactory();
 		Connection connection=null;
 		
+
 		String name=computer.getNamePC();
-		String company_id=computer.getNameManuf();
+		int company_id=computer.getNameManuf();
 		Timestamp introduced=computer.getDateB();
 		Timestamp discontinued=computer.getDateF();
 		
 		try {
-			connection = factory.ConnectDB(connection);
+			connection = factory.connectDB(connection);
 			/* Création de l'objet gérant les requêtes */
-			Statement statement = connection.createStatement();
-			ResultSet resultat = statement.executeQuery("INSERT INTO computer" + "VALUES (" + name + ", " + company_id + ", " + introduced + "," + discontinued+ ")");
+			String sql=("INSERT INTO computer (name,introduced,discontinued,company_id) VALUES (?,?,?,?)");
+			PreparedStatement statement = connection.prepareStatement(sql);
+			statement.setString(1, name);
+			statement.setTimestamp(2, introduced);
+			statement.setTimestamp(3, discontinued);
+			statement.setInt(4, company_id);
+			statement.executeUpdate();
 			} catch ( SQLException e ) {
+				System.out.println("RIP");
 		    } finally {
 		        if ( connection != null ) {
 		                try {
@@ -133,7 +152,7 @@ public class ComputerDaoImp implements ComputerDao{
 						}
 		        }
 		    }
-		
-	}	
+	}
+	
 	
 }

@@ -4,9 +4,15 @@ public class Company {
 	
 	private String nameCompany;
 
+
+
 	public Company(String nameCompany) {
 		super();
 		this.setNameCompany(nameCompany);
+	}
+
+	public Company() {
+		// TODO Auto-generated constructor stub
 	}
 
 	public String getNameCompany() {
@@ -17,4 +23,8 @@ public class Company {
 		this.nameCompany = nameCompany;
 	}
 
+	@Override
+	public String toString() {
+		return "Company:" + nameCompany;
+	}
 }
