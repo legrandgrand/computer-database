@@ -56,10 +56,6 @@ public class ComputerDaoImp implements ComputerDao{
 		DaoFactory factory = new DaoFactory();
 		Connection connection=null;
 		
-		/*String company_id=computer.getNameManuf();
-		Timestamp introduced=computer.getDateB();
-		Timestamp discontinued=computer.getDateF();*/
-		
 		try {
 			connection = factory.connectDB(connection);
 			/* Création de l'objet gérant les requêtes */
@@ -119,7 +115,6 @@ public class ComputerDaoImp implements ComputerDao{
 
 	
 	
-	//TODO: gérer les nulls
 	@Override
 	public void addComputer(Computer computer) {
 		DaoFactory factory = new DaoFactory();

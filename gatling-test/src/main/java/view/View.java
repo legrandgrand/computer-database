@@ -91,7 +91,7 @@ public class View {
 	}
 	
 	
-	//TODO: gérer les nulls/exceptions
+	//TODO gérer les différents timestamps et les id compagnies
 	private void addComputer() {
 		Timestamp intro = null;
 		Timestamp discontinuation = null;
@@ -104,15 +104,15 @@ public class View {
 		
 		System.out.println("Please enter the date of introduction. Format should be YYYY-MM-DD. (If the date is unknown, just press enter.)");
 		timestamp=sc.nextLine();
-		if(timestamp != null) {
-			timestamp=timestamp+"00:00:00";
+		if(!timestamp.equals("")) {
+			timestamp=timestamp+" 00:00:00";
 			intro = Timestamp.valueOf(timestamp);
 		}
 			
 		System.out.println("Please enter the date of discontinuation. Format should be YYYY-MM-DD. (If the date is unknown or the computer is still continuing, just press enter.)");		
 		timestamp=sc.nextLine();
-		if(timestamp != null) {//Doesn't work. need to find value where that works
-			timestamp=timestamp+"00:00:00";
+		if(!timestamp.equals("")) {//Doesn't work. need to find value where that works
+			timestamp=timestamp+" 00:00:00";
 			discontinuation = Timestamp.valueOf(timestamp);
 		}
 		
@@ -126,7 +126,6 @@ public class View {
 	}
 
 	
-	//TODO: gérer les nulls/exceptions
 	private void deleteComputer() {
 		System.out.println("We will now delete a computer from the database."
 				+ "Please enter the computer's name you want to delete.");
@@ -137,8 +136,7 @@ public class View {
 		mainMenu();
 	}
 
-	
-	//TODO: gérer les nulls/exceptions
+	//TODO gérer les différents timestamps et les id compagnies
 	private void updateComputer() {
 		Timestamp intro = null;
 		Timestamp discontinuation = null;
@@ -151,15 +149,15 @@ public class View {
 		
 		System.out.println("Please enter the date of introduction you want to update. Format should be YYYY-MM-DD. (If the date is unknown, just press enter.)");
 		timestamp=sc.nextLine();
-		if(timestamp != null) {
-			timestamp=timestamp+"00:00:00";
+		if(!timestamp.equals("")) {
+			timestamp=timestamp+" 00:00:00";
 			intro = Timestamp.valueOf(timestamp);
 		}
 		
 		System.out.println("Please enter the date of discontinuation you want to update. Format should be YYYY-MM-DD. (If the date is unknown or the computer is still continuing, just press enter.)");		
 		timestamp=sc.nextLine();
-		if(timestamp != null) {//Doesn't work. need to find value where that works
-			timestamp=timestamp+"00:00:00";
+		if(!timestamp.equals("")) {
+			timestamp=timestamp+" 00:00:00";
 			discontinuation = Timestamp.valueOf(timestamp);
 		}
 		

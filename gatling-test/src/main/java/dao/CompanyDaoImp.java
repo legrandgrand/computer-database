@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Company;
-//Add function to find the company's id with the company name
+
 public class CompanyDaoImp implements CompanyDao {
 	
 	@Override
@@ -24,7 +24,6 @@ public class CompanyDaoImp implements CompanyDao {
 			ResultSet resultat = statement.executeQuery(sql);
 	
 			 while(resultat.next()) {
-				 //int id=resultat.getInt("id");
 				 String name=resultat.getString("name");
 				 Company company=new Company(name);
 				 list.add(company);		 
@@ -42,7 +41,6 @@ public class CompanyDaoImp implements CompanyDao {
 						}
 		    }
 	    }
-
 		return list;
 	}
 	
