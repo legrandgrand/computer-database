@@ -2,45 +2,67 @@ package model;
 
 import java.sql.Timestamp;
 
+/**
+ * The Class Computer.
+ */
 public class Computer {
-	private String namePC;//Obligatoire
-	private int nameManuf;
-	private Timestamp dateB;
-	private Timestamp dateF;//Supérieur à dateB
 	
-	public Computer(String namePC, int nameManuf, Timestamp dateIntro, Timestamp dateExit) {
+	/** The PC name. */
+	private String namePC;//Compulsory
+	
+	/** The name of the manufacturer. */
+	private int nameManufacturer;
+	
+	/** The date of introduction. */
+	private Timestamp dateIntro;
+	
+	/** The date of discontinuation. */
+	private Timestamp dateDiscontinuation;//Has to be higher than date B
+	
+	/**
+	 * Instantiates a new computer.
+	 *
+	 * @param namePC the name PC
+	 * @param nameManufacturer the name manufacturer
+	 * @param dateIntro the date intro
+	 * @param dateDiscontinuation the date discontinuation
+	 */
+	public Computer(String namePC, int nameManufacturer, Timestamp dateIntro, Timestamp dateDiscontinuation) {
 		super();
 		this.setNamePC(namePC);
-		this.setNameManuf(nameManuf);
-		this.setDateB(dateIntro);
-		this.setDateF(dateExit);
+		this.setNameManuf(nameManufacturer);
+		this.setDateIntro(dateIntro);
+		this.setDateDiscontinuation(dateDiscontinuation);
 	}
 
+	/**
+	 * Instantiates a new computer.
+	 */
 	public Computer() {
 	}
 
 	public Timestamp getDateB() {
-		return dateB;
+		return dateIntro;
 	}
 
-	public void setDateB(Timestamp dateB) {
-		this.dateB = dateB;
+	public void setDateIntro(Timestamp dateB) {
+		this.dateIntro = dateB;
 	}
 
 	public Timestamp getDateF() {
-		return dateF;
+		return dateDiscontinuation;
 	}
 
-	public void setDateF(Timestamp dateF) {
-		this.dateF = dateF;
+	public void setDateDiscontinuation(Timestamp dateF) {
+		this.dateDiscontinuation = dateF;
 	}
 
 	public int getNameManuf() {
-		return nameManuf;
+		return nameManufacturer;
 	}
 
 	public void setNameManuf(int nameManuf) {
-		this.nameManuf = nameManuf;
+		this.nameManufacturer = nameManuf;
 	}
 
 	public String getNamePC() {
@@ -51,10 +73,12 @@ public class Computer {
 		this.namePC = namePC;
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
-		String computer="Name: "+ namePC + "\n Introduction : " +  dateB + "\n Discontinuation: " + dateF + "\n Company Number: "+ nameManuf;
-		return computer;
+		return "Name: "+ namePC + "\n Introduction : " +  dateIntro + "\n Discontinuation: " + dateDiscontinuation + "\n Company Number: "+ nameManufacturer;
 	}
 
 }

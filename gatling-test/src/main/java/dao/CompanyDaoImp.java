@@ -9,18 +9,30 @@ import java.util.List;
 
 import model.Company;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CompanyDaoImp.
+ */
 public class CompanyDaoImp implements CompanyDao {
 	
+	public CompanyDaoImp() {
+		
+	}
+	
+	/* (non-Javadoc)
+	 * @see dao.CompanyDao#listCompanies()
+	 */
 	@Override
 	public List<Company> listCompanies() {
 		List<Company> list= new ArrayList<Company>();
-		DaoFactory factory = new DaoFactory();
+		DaoFactory factory = DaoFactory.getInstance();
 		Connection connection=null;
 		try {
 			connection = factory.connectDB(connection);
 			String sql = "SELECT id, name FROM company";
-			/* Création de l'objet gérant les requêtes */
+			// Create objects for query 
 			Statement statement = connection.createStatement();
+			//Execute query
 			ResultSet resultat = statement.executeQuery(sql);
 	
 			 while(resultat.next()) {
@@ -29,11 +41,10 @@ public class CompanyDaoImp implements CompanyDao {
 				 list.add(company);		 
 			}
 			} catch ( SQLException e ) {
-				System.out.println("RIP");
+				System.out.println("Couldn't connect to database");
 		    } finally {
 		        if ( connection != null ) {
 		                try {
-		                	System.out.println("RIP2");
 							connection.close();
 						} catch (SQLException e) {
 							System.out.println("RIP3");
@@ -44,5 +55,31 @@ public class CompanyDaoImp implements CompanyDao {
 		return list;
 	}
 	
-
+	public int getCompany(String name) {
+		DaoFactory factory = DaoFactory.getInstance();
+		Connection connection=null;
+		try {
+			connection = factory.connectDB(connection);
+			String sql = "SELECT id FROM company WHERE name = '"+name+"'";
+			// Create objects for query 
+			Statement statement = connection.createStatement();
+			//Execute query
+			ResultSet resultat = statement.executeQuery(sql);
+			if(resultat.next()) {
+				return resultat.getInt("id");
+			}	
+			} catch ( SQLException e ) {
+				System.out.println("Couldn't connect to database");
+		    } finally {
+		        if ( connection != null ) {
+		                try {
+							connection.close();
+						} catch (SQLException e) {
+							System.out.println("RIP3");
+							e.printStackTrace();
+						}
+		        }
+		    }
+		return 0;
+	}
 }
