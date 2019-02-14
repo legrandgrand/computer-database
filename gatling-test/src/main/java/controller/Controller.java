@@ -5,19 +5,24 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
-import dao.DaoFactory;
 import model.Company;
 import model.Computer;
+import service.Service;
 
 /**
  * The Class Controller.
  */
 public class Controller {
 	
+	private Service service;
+	
 	/**
 	 * Instantiates a new controller.
+	 * @param service 
 	 */
-	public Controller() {}
+	public Controller(Service service) {
+		this.service = service;
+	}
 	
 
 	
@@ -25,7 +30,7 @@ public class Controller {
 	 * List company.
 	 */
 	public void listCompany() {
-		List<Company> list = DaoFactory.getCompanyDao().listCompanies();
+		List<Company> list = service.listCompany();
 		Company company = new Company();
 		 Iterator<Company> itr = list.iterator();
 		 while(itr.hasNext()) {
@@ -38,7 +43,7 @@ public class Controller {
 	 * List computer.
 	 */
 	public void listComputer() {
-		List<Computer> list = DaoFactory.getComputerDao().listComputers();
+		List<Computer> list = service.listComputer();
 		Computer computer = new Computer();
 		Iterator<Computer> itr = list.iterator();
 		while(itr.hasNext()) {
@@ -54,7 +59,7 @@ public class Controller {
 	 * @param name the name
 	 */
 	public void deleteCompany(String name) {
-		DaoFactory.getComputerDao().deleteComputer(name);
+		service.deleteCompany(name);
 	}
 	
 	/**
@@ -90,13 +95,16 @@ public class Controller {
 	 * @param intro the date of introduction
 	 * @return the date of discontinuation
 	 */
-	public Timestamp setComputerDisc(Scanner sc, Timestamp intro) {
+	public Timestamp setComputerDisc(Scanner sc, Timestamp intro) {//TODO: gérer le cas où intro est null
 		Timestamp discontinuation = null;
 		String timestamp2 = null;	
 		do {
 			timestamp2=sc.nextLine();
 			if(!timestamp2.equals("")) {
 				discontinuation = setTimestamp(timestamp2);
+				if(intro.equals(null)) {
+					break;
+				}
 				if(discontinuation.before(intro)) {
 					System.out.println("The date you entered happened before the date of introduction. Please enter a valid date.");
 				}
@@ -104,7 +112,7 @@ public class Controller {
 			else {
 				break;
 			}
-		} while(discontinuation.before(intro));
+		} while(intro.equals(null)||discontinuation.before(intro));
 		
 		return discontinuation;
 		
@@ -131,7 +139,7 @@ public class Controller {
 	 */
 	public Computer addComputer(String name, Timestamp intro, Timestamp discontinuation, int companyId) {
 		Computer computer=new Computer(name, companyId, intro, discontinuation);
-		DaoFactory.getComputerDao().addComputer(computer);
+		service.addComputer(computer);
 		return computer;
 	}
 	
@@ -146,7 +154,8 @@ public class Controller {
 	 */
 	public Computer updateComputer(String name, Timestamp intro, Timestamp discontinuation, int companyId) {
 		Computer computer=new Computer(name, companyId, intro, discontinuation);
-		DaoFactory.getComputerDao().updateComputer(computer);
+		service.updateComputer(computer);
+		
 		return computer;
 	}
 	
