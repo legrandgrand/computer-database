@@ -166,7 +166,7 @@ public class Controller {
 	 * @return the timestamp
 	 */
 	public Timestamp setTimestamp(String timestamp){	
-		timestamp=timestamp+" 00:00:00";
+		timestamp=timestamp+" 00:00:00";//timestamp format: YYYY-MM-DD (user input) + 00:00:00 
 		return Timestamp.valueOf(timestamp);
 	}
 
