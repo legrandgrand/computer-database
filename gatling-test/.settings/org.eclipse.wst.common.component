@@ -6,6 +6,7 @@
                 
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
                 
+<<<<<<< HEAD
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/resources"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
@@ -13,6 +14,14 @@
         <property name="context-root" value="computer-database-gatling"/>
                 
         <property name="java-output-path" value="/computer-database-gatling/target/classes"/>
+=======
+
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/resources"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
+                
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/resources"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/
+>>>>>>> f3cee9f70ce9afd5e58f6793c0fc2469f74a0d16
             
     </wb-module>
     
