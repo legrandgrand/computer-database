@@ -58,8 +58,8 @@ public class Controller {
 	 *
 	 * @param name the name
 	 */
-	public void deleteCompany(String name) {
-		service.deleteCompany(name);
+	public void deleteComputer(String name) {
+		service.deleteComputer(name);
 	}
 	
 	/**

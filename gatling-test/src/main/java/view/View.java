@@ -139,7 +139,7 @@ public class View {
 				+ "Please enter the computer's name you want to delete.");
 		Scanner sc = new Scanner(System.in);
 		String computerName=sc.nextLine();
-		controller.deleteCompany(computerName);	
+		controller.deleteComputer(computerName);	
 		System.out.println(computerName + "a été supprimé");
 		mainMenu();
 	}

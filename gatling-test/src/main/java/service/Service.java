@@ -21,7 +21,7 @@ public class Service {
 	 *
 	 * @param name the name
 	 */
-	public void deleteCompany(String name){
+	public void deleteComputer(String name){
 		DaoFactory.getComputerDao().deleteComputer(name);
 	}
 	
